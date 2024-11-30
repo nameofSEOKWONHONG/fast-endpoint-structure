@@ -1,6 +1,5 @@
 ﻿using Infrastructure.Entity;
 using Microsoft.EntityFrameworkCore;
-using MovieSharpApi.Infrastructure.EF;
 
 namespace Infrastructure.EF;
 

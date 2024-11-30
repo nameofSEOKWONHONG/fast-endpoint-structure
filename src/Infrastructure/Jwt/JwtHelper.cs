@@ -8,8 +8,8 @@ namespace Infrastructure.Jwt;
 
 public class JwtHelper
 {
-    public const string Issuer = "MovieSharpApi";
-    public const string Audience = "MovieSharpApi";
+    public const string Issuer = "FastEndpointApi";
+    public const string Audience = "FastEndpointApi";
     public const string SecretKey = "aHb2c9YRGSlFZDaPfbA3m4z+Lyr4O9dSWL2c+CiqWRM=";
     
     public static string GenerateJwtToken(DateTime? expire, string email)

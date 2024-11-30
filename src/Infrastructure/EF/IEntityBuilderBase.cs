@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace MovieSharpApi.Infrastructure.EF;
+namespace Infrastructure.EF;
 
 public interface IEntityBuilderBase
 {
