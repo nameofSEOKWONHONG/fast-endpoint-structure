@@ -1,6 +1,5 @@
 using FastEndpoints;
 using FastEndpoints.Security;
-using FastEndpoints.Swagger;
 using Feature.Account.Database;
 using Feature.Weather.Database;
 using Feature.Weather.Services;
@@ -35,7 +34,7 @@ builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services
     .AddDbContext<AppDbContext>((s, options) =>
     {
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("SQL_CONNECTION"));
         if (builder.Environment.IsDevelopment())
         {
             options.EnableSensitiveDataLogging()
@@ -48,7 +47,7 @@ builder.Services
 builder.Services
     .AddDbContext<WeatherDbContext>((s, options) =>
     {
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("SQL_CONNECTION"));
         if (builder.Environment.IsDevelopment())
         {
             options.EnableSensitiveDataLogging()

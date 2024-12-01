@@ -20,9 +20,4 @@
       <ProjectReference Include="..\Features\Feature.Weather\Feature.Weather.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Features\Account\" />
-      <Folder Include="Features\Weather\" />
-    </ItemGroup>
 </Project>
