@@ -7,6 +7,8 @@
     </PropertyGroup>
     
     <ItemGroup>
+        <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.400.58" />
+        <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.7.0" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
         <PackageReference Include="eXtensionSharp" Version="1.0.1.12" />
         <PackageReference Include="eXtensionSharp.AspNet" Version="0.0.3" />
@@ -21,6 +23,7 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.2.1" />
+        <PackageReference Include="MongoDB.Driver" Version="3.0.0" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.1" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.2.1" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.0" />

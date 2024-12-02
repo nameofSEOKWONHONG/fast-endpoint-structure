@@ -2,13 +2,15 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastEndpointApi", "src\FastEndpointApi\FastEndpointApi.csproj", "{82DD988E-4DA0-4D2F-9C60-055CDAEEB160}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Features", "Features", "{3AE9E10B-1771-4FA0-A1CF-013D2DF4A28A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Features", "02.Features", "{3AE9E10B-1771-4FA0-A1CF-013D2DF4A28A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Weather", "src\Features\Feature.Weather\Feature.Weather.csproj", "{CE1112D0-DF04-4EA1-97B0-B97F6CC020F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Account", "src\Features\Feature.Account\Feature.Account.csproj", "{E8640BD0-A0E4-441D-B486-68850B246EB3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{545D2F60-3A8A-4EF0-B84B-06B6B6F7B1CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Infrastructure", "01.Infrastructure", "{20F9A0F3-46A0-4E4D-A182-C77C973011DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CE1112D0-DF04-4EA1-97B0-B97F6CC020F3} = {3AE9E10B-1771-4FA0-A1CF-013D2DF4A28A}
 		{E8640BD0-A0E4-441D-B486-68850B246EB3} = {3AE9E10B-1771-4FA0-A1CF-013D2DF4A28A}
+		{545D2F60-3A8A-4EF0-B84B-06B6B6F7B1CF} = {20F9A0F3-46A0-4E4D-A182-C77C973011DD}
 	EndGlobalSection
 EndGlobal

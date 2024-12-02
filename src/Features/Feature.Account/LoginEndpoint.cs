@@ -39,6 +39,7 @@ public class LoginEndpoint : Endpoint<LoginRequest>
                 o.User.Roles.Add("Admin");
                 o.User["UserId"] = user.Id;
                 o.User["Email"] = user.Email;
+                o.User["UserName"] = user.UserName;
             });
 
         await SendAsync(

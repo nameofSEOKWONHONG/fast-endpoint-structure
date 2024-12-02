@@ -2,11 +2,17 @@ using FastEndpoints;
 using FastEndpoints.Security;
 using Feature.Account.Database;
 using Feature.Weather.Database;
-using Feature.Weather.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using FastEndpointApi.OpenApi;
+using Feature.Weather;
+using Feature.Weather.Repositories;
+using Infrastructure;
+using Infrastructure.KeyValueManager;
+using Infrastructure.Session;
 using Scalar.AspNetCore;
+
+DotNetEnv.Env.Load("./.env");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +35,8 @@ builder.Services
 builder.Services.AddHybridCache();
 #pragma warning restore EXTEXP0018
 
-builder.Services.AddScoped<IWeatherService, WeatherService>();
+builder.Services.AddInfrastructure();
+builder.Services.AddWeatherFeature();
 
 builder.Services
     .AddDbContext<AppDbContext>((s, options) =>
@@ -79,17 +86,32 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication() //add this
     .UseAuthorization() //add this
-    .UseFastEndpoints()
+    .UseFastEndpoints(c =>
+    {
+        c.Endpoints.Configurator = ep =>
+        {
+            ep.PreProcessor<SessionPreProcess>(Order.Before);
+        };
+    })
     ;
 
 app.UseHttpsRedirection();
 
 using (var scope = app.Services.CreateScope())
 {
-    var service = scope.ServiceProvider.GetRequiredService<IWeatherService>();
-    await service.Initialize();    
+    var service = scope.ServiceProvider.GetRequiredService<IWeatherRepository>();
+    await service.Initialize();
+
+    var resolver = scope.ServiceProvider.GetRequiredService<KeyValueLoadExecutor>();
+    resolver.Start(new Dictionary<string, string>()
+    {
+        {"KEY_ID", Environment.GetEnvironmentVariable("AWS_KEYID")},
+        {"ACCESS_KEY", Environment.GetEnvironmentVariable("AWS_ACCESSKEY")},
+        {"REGION", Environment.GetEnvironmentVariable("AWS_REGION")},
+        {"SECRET_NAME", Environment.GetEnvironmentVariable("AWS_SECRET_NAME")},
+        {"VERSION_STAGE", "AWSCURRENT"},
+    });
 }
 
 
 app.Run();
-
