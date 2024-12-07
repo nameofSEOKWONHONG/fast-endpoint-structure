@@ -33,9 +33,10 @@ public class WeatherForecastBuilder : EntityBuilderBase<WeatherForecast>
     {
         builder.Entity<WeatherForecast>(e =>
         {
-            e.ToTable(nameof(WeatherForecast), "work");
+            e.ToTable(nameof(WeatherForecast), "example");
             e.HasKey(x => x.Id);
             e.Property(x => x.Id).ValueGeneratedOnAdd();
+            e.Property(m => m.Summary).HasMaxLength(100);
         });
         base.Build(builder);
     }

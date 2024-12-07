@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="DotNetEnv" Version="3.1.1" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0"/>        
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+        <PackageReference Include="DotNetEnv"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>        
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>        
-        <PackageReference Include="Scalar.AspNetCore" Version="1.2.39" />
+        <PackageReference Include="Scalar.AspNetCore"/>
     </ItemGroup>
 
     <ItemGroup>

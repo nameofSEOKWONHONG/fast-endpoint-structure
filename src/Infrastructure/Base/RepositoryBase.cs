@@ -15,20 +15,20 @@ public class RepositoryBase<TSelf> : DisposeBase, IRepositoryBase
     protected ILogger Logger;
     protected ISessionContext SessionContext;
     
-    public RepositoryBase(ILogger<TSelf> logger, ISessionContext sessionContext)
+    protected RepositoryBase(ILogger<TSelf> logger, ISessionContext sessionContext)
     {
         Logger = logger;
         SessionContext = sessionContext;
     }
 }
 
-public class RepositoryBase<TSelf, TDbContext> : RepositoryBase<TSelf> 
+public abstract class RepositoryBase<TSelf, TDbContext> : RepositoryBase<TSelf> 
     where TSelf : class
     where TDbContext : DbContext
 {
     protected TDbContext DbContext;
-    public RepositoryBase(ILogger<TSelf> logger, ISessionContext sessionContext, TDbContext dbContext) : base(logger, sessionContext)
+    protected RepositoryBase(ILogger<TSelf> logger, ISessionContext sessionContext, TDbContext dbContext) : base(logger, sessionContext)
     {
         DbContext = dbContext;
     }
-} 
+}

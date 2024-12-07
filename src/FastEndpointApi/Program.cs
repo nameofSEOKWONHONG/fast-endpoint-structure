@@ -1,18 +1,16 @@
 using FastEndpoints;
 using FastEndpoints.Security;
-using Feature.Account.Database;
-using Feature.Weather.Database;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using FastEndpointApi.OpenApi;
+using Feature.Account;
 using Feature.Weather;
-using Feature.Weather.Repositories;
 using Infrastructure;
-using Infrastructure.KeyValueManager;
 using Infrastructure.Session;
 using Scalar.AspNetCore;
 
 DotNetEnv.Env.Load("./.env");
+
+#region [service]
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,33 +34,12 @@ builder.Services.AddHybridCache();
 #pragma warning restore EXTEXP0018
 
 builder.Services.AddInfrastructure();
-builder.Services.AddWeatherFeature();
+builder.AddWeatherFeature();
+builder.AddAccountFeature();
 
-builder.Services
-    .AddDbContext<AppDbContext>((s, options) =>
-    {
-        options.UseSqlServer(builder.Configuration.GetConnectionString("SQL_CONNECTION"));
-        if (builder.Environment.IsDevelopment())
-        {
-            options.EnableSensitiveDataLogging()
-                .EnableThreadSafetyChecks()
-                .EnableDetailedErrors()
-                ;
-        }
-    });
+#endregion
 
-builder.Services
-    .AddDbContext<WeatherDbContext>((s, options) =>
-    {
-        options.UseSqlServer(builder.Configuration.GetConnectionString("SQL_CONNECTION"));
-        if (builder.Environment.IsDevelopment())
-        {
-            options.EnableSensitiveDataLogging()
-                .EnableThreadSafetyChecks()
-                .EnableDetailedErrors()
-                ;
-        }
-    });
+#region [app]
 
 var app = builder.Build();
 
@@ -97,21 +74,8 @@ app.UseAuthentication() //add this
 
 app.UseHttpsRedirection();
 
-using (var scope = app.Services.CreateScope())
-{
-    var service = scope.ServiceProvider.GetRequiredService<IWeatherRepository>();
-    await service.Initialize();
-
-    var resolver = scope.ServiceProvider.GetRequiredService<KeyValueLoadExecutor>();
-    resolver.Start(new Dictionary<string, string>()
-    {
-        {"KEY_ID", Environment.GetEnvironmentVariable("AWS_KEYID")},
-        {"ACCESS_KEY", Environment.GetEnvironmentVariable("AWS_ACCESSKEY")},
-        {"REGION", Environment.GetEnvironmentVariable("AWS_REGION")},
-        {"SECRET_NAME", Environment.GetEnvironmentVariable("AWS_SECRET_NAME")},
-        {"VERSION_STAGE", "AWSCURRENT"},
-    });
-}
-
+app.UseInfrastructure();
 
 app.Run();
+
+#endregion

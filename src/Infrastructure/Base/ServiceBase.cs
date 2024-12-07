@@ -9,7 +9,7 @@ public class ServiceBase<TSelf> : DisposeBase
 {
     protected ILogger Logger;
     protected ISessionContext SessionContext;
-    public ServiceBase(ILogger logger, ISessionContext sessionContext)
+    public ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext)
     {
         Logger = logger;
         SessionContext = sessionContext;

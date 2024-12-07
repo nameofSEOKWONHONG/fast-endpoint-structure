@@ -49,7 +49,7 @@ public class AwsSecretManagerLoader : IKeyValueLoader, IKeyValueLoopStarter
                 var client = new AmazonSecretsManagerClient(keyId, accessKey, RegionEndpoint.GetBySystemName(region));
                 var request = new GetSecretValueRequest()
                 {
-                    SecretId = secretName,
+                    SecretId = secretName,  
                     VersionStage = versionStage, // VersionStage defaults to AWSCURRENT if unspecified.
                 };
 
