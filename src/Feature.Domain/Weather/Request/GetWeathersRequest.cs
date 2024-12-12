@@ -1,4 +1,4 @@
-﻿using Infrastructure.Domains;
+﻿using Feature.Domain.Base;
 
 namespace Feature.Domain.Weather.Request;
 

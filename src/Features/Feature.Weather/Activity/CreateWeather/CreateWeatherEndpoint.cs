@@ -1,7 +1,7 @@
 ﻿using FastEndpoints;
+using Feature.Domain.Base;
 using Feature.Domain.Weather.Abstract;
 using Feature.Domain.Weather.Request;
-using Infrastructure.Domains;
 
 namespace Feature.Weather.Activity.CreateWeather;
 

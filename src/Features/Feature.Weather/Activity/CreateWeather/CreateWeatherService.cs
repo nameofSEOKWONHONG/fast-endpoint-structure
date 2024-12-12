@@ -1,7 +1,7 @@
-﻿using Feature.Domain.Weather.Abstract;
+﻿using Feature.Domain.Base;
+using Feature.Domain.Weather.Abstract;
 using Feature.Domain.Weather.Request;
 using Infrastructure.Base;
-using Infrastructure.Domains;
 using Infrastructure.Session;
 using Microsoft.Extensions.Logging;
 

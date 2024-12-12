@@ -1,8 +1,8 @@
-﻿using Feature.Domain.Weather.Abstract;
+﻿using Feature.Domain.Base;
+using Feature.Domain.Weather.Abstract;
 using Feature.Domain.Weather.Result;
 using Feature.Weather.Core;
 using Infrastructure.Base;
-using Infrastructure.Domains;
 using Infrastructure.Session;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

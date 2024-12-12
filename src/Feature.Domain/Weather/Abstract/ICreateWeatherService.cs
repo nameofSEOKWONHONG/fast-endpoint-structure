@@ -1,5 +1,5 @@
-﻿using Feature.Domain.Weather.Request;
-using Infrastructure.Domains;
+﻿using Feature.Domain.Base;
+using Feature.Domain.Weather.Request;
 
 namespace Feature.Domain.Weather.Abstract;
 

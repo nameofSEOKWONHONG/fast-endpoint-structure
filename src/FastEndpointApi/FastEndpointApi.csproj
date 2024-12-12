@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Feature.Pdf\Feature.Pdf.csproj" />
       <ProjectReference Include="..\Features\Feature.Account\Feature.Account.csproj" />
       <ProjectReference Include="..\Features\Feature.Weather\Feature.Weather.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />

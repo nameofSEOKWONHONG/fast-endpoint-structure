@@ -1,8 +1,8 @@
 ﻿using FastEndpoints;
+using Feature.Domain.Base;
 using Feature.Domain.Weather.Abstract;
 using Feature.Domain.Weather.Request;
 using Feature.Domain.Weather.Result;
-using Infrastructure.Domains;
 
 namespace Feature.Weather.Activity.GetWeathers;
 

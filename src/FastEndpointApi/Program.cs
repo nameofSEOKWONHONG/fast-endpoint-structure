@@ -3,6 +3,7 @@ using FastEndpoints.Security;
 using Microsoft.OpenApi;
 using FastEndpointApi.OpenApi;
 using Feature.Account;
+using Feature.Pdf;
 using Feature.Weather;
 using Infrastructure;
 using Infrastructure.Session;
@@ -36,6 +37,7 @@ builder.Services.AddHybridCache();
 builder.Services.AddInfrastructure();
 builder.AddWeatherFeature();
 builder.AddAccountFeature();
+builder.AddPdfFeature();
 
 #endregion
 

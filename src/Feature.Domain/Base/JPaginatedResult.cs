@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Domains;
+﻿namespace Feature.Domain.Base;
 
 public class JPaginatedResult<T> : JResults<T>
 {

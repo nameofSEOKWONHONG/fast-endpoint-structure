@@ -3,7 +3,7 @@ using FastEndpoints;
 using Feature.Account.Core;
 using Feature.Account.Entities;
 using Feature.Account.SignUp.Domain;
-using Infrastructure.Domains;
+using Feature.Domain.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace Feature.Account.SignUp;
