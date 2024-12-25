@@ -21,8 +21,25 @@ public class ServiceBase<TSelf, TDbContext> : ServiceBase<TSelf>
     where TDbContext : DbContext
 {
     protected TDbContext DbContext;
+    
+    /// <summary>
+    /// ctor
+    /// </summary>
+    /// <param name="logger"></param>
+    /// <param name="sessionContext"></param>
+    /// <param name="dbContext"></param>
     public ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext, TDbContext dbContext) : base(logger, sessionContext)
     {
         DbContext = dbContext;
     }
+    
+    /// <summary>
+    /// ctor
+    /// </summary>
+    /// <param name="logger"></param>
+    /// <param name="dbContext"></param>
+    public ServiceBase(ILogger<TSelf> logger, TDbContext dbContext): this(logger,null, dbContext)
+    {
+        
+    }    
 }

@@ -1,5 +1,6 @@
 ﻿using eXtensionSharp;
 using Feature.Account.Core;
+using Feature.Account.Member.Services;
 using Infrastructure.KeyValueManager;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ public static class AccountRegister
 {
     public static void AddAccountFeature(this WebApplicationBuilder builder)
     {
+        builder.Services.AddScoped<ICreateUserService, CreateUserService>();
+        
         builder.Services
             .AddDbContext<AppDbContext>((s, options) =>
             {

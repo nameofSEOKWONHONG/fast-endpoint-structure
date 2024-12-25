@@ -18,7 +18,7 @@ public class AppDbContext : DbContextBase<AppDbContext>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("identity");
-        modelBuilder.Entity<User>(e =>
+        modelBuilder.Entity<Entities.User>(e =>
         {
             e.ToTable(nameof(User));
             e.HasKey(x => x.Id);
