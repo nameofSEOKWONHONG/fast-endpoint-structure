@@ -3,6 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="EFCore.NamingConventions" Version="9.0.0" />
     <PackageVersion Include="eXtensionSharp" Version="1.0.1.12" />
     <PackageVersion Include="eXtensionSharp.AspNet" Version="0.0.3" />
     <PackageVersion Include="BCrypt.Net-Next" Version="4.0.3" />

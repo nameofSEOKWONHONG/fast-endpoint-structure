@@ -22,7 +22,7 @@ public class ProductPlanBuilder : EntityBuilderBase<ProductPlan>
     {
         builder.Entity<ProductPlan>(e =>
         {
-            e.ToTable("Plans", "product");
+            e.ToTable("plans", "product");
             e.HasKey(x => x.Id);
             e.Property(x => x.Id);
             e.Property(x => x.Title).HasMaxLength(200);
@@ -50,7 +50,7 @@ public class ApprovalLineBuilder : EntityBuilderBase<ApprovalLine>
     {
         builder.Entity<ApprovalLine>(e =>
         {
-            e.ToTable("ApprovalLines", "product");
+            e.ToTable("approval_lines", "product");
             e.HasKey(x => x.Id);
             e.Property(x => x.Id)
                 .ValueGeneratedOnAdd();

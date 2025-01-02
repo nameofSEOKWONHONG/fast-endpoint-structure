@@ -1,10 +1,15 @@
 ﻿using Feature.Product.Plan.Entities;
+using Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 
 namespace Feature.Product.Core;
 
-public class ProductDbContext : DbContext
+public class ProductDbContext : DbContextBase<ProductDbContext>
 {
+    /// <summary>
+    /// ctor
+    /// </summary>
+    /// <param name="options"></param>
     public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options)
     {
     }
@@ -12,10 +17,10 @@ public class ProductDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("product");
-        // this.OnModelCreating(modelBuilder, new List<IEntityBuilderBase>()
-        // {
-        //     
-        // });
+        this.OnModelCreating(modelBuilder, [
+            new ProductPlanBuilder(),
+            new ApprovalLineBuilder()
+        ]);
     }
     
     public DbSet<ProductPlan> ProductPlans { get; set; }
