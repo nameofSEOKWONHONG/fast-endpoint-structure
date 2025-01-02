@@ -11,17 +11,23 @@ namespace Feature.Weather.Activity.GetWeather;
 
 public class GetWeatherService : ServiceBase<GetWeatherService, WeatherDbContext>, IGetWeatherService
 {
+    /// <summary>
+    /// ctor
+    /// </summary>
+    /// <param name="logger"></param>
+    /// <param name="sessionContext"></param>
+    /// <param name="dbContext"></param>
     public GetWeatherService(ILogger<GetWeatherService> logger, ISessionContext sessionContext, WeatherDbContext dbContext) : base(logger, sessionContext, dbContext)
     {
     }
 
 
-    public async Task<JResults<GetWeatherResult>> HandleAsync(int id)
+    public async Task<JResults<GetWeatherResult>> HandleAsync(int id, CancellationToken ct)
     {
         var item =await this.DbContext.WeatherForecasts.AsNoTracking()
             .Where(w => w.Id == id)
             .Select(m => new GetWeatherResult(m.Id, m.Date, m.TemperatureC, m.Summary))
-            .FirstAsync();
+            .FirstAsync(cancellationToken: ct);
 
         return await JResults<GetWeatherResult>.SuccessAsync(item);
     }

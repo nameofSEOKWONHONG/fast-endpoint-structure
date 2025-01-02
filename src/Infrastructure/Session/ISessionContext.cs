@@ -3,5 +3,5 @@
 public interface ISessionContext
 {
     ISessionUser User { get; set; }
-    ISessionCurrent Current { get; set; }
+    ISessionDate Date { get; set; }
 }

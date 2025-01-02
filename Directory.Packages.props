@@ -10,6 +10,7 @@
     <PackageVersion Include="FastEndpoints.Security" Version="5.31.0" />
     <PackageVersion Include="DotNetEnv" Version="3.1.1" />
     <PackageVersion Include="QuestPDF" Version="2025.1.0-alpha0" />
+    <PackageVersion Include="Riok.Mapperly" Version="4.1.1" ExcludeAssets="runtime" PrivateAssets="all" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.2.1" />
     <PackageVersion Include="AWSSDK.SecretsManager" Version="3.7.400.58" />
     <PackageVersion Include="Azure.Security.KeyVault.Secrets" Version="4.7.0" />

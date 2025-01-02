@@ -4,5 +4,5 @@ namespace Feature.Domain.Weather.Abstract;
 
 public interface ICreateWeatherRepository
 {
-    Task<bool> HandleAsync(CreateWeatherForecastRequest request);    
+    Task<bool> HandleAsync(CreateWeatherForecastRequest request, CancellationToken cancellationToken);
 }

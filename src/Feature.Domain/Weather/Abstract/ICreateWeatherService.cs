@@ -5,5 +5,5 @@ namespace Feature.Domain.Weather.Abstract;
 
 public interface ICreateWeatherService
 {
-    Task<JResults<bool>> HandleAsync(CreateWeatherForecastRequest request);
+    Task<JResults<bool>> HandleAsync(CreateWeatherForecastRequest request, CancellationToken ct);
 }

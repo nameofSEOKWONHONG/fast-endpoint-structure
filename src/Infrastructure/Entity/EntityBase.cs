@@ -37,4 +37,10 @@ public class EntityBase : IEntityBase
     protected EntityBase()
     {
     }
+
+    protected EntityBase(string createdBy, DateTime createdOn)
+    {
+        CreatedBy = createdBy;
+        CreatedOn = createdOn;
+    }
 }

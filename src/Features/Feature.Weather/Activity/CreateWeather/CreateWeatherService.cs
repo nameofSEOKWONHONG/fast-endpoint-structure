@@ -23,9 +23,9 @@ public class CreateWeatherService : ServiceBase<CreateWeatherService>, ICreateWe
         _repository = repository;
     }
 
-    public async Task<JResults<bool>> HandleAsync(CreateWeatherForecastRequest request)
+    public async Task<JResults<bool>> HandleAsync(CreateWeatherForecastRequest request, CancellationToken ct)
     {
-        var result = await _repository.HandleAsync(request);
+        var result = await _repository.HandleAsync(request, ct);
         return await JResults<bool>.SuccessAsync(result);
     }
 }

@@ -74,6 +74,8 @@ app.UseAuthentication() //add this
     })
     ;
 
+app.UseWeatherFeature();
+
 app.UseHttpsRedirection();
 
 app.UseInfrastructure();

@@ -1,6 +1,6 @@
 namespace Infrastructure.Session;
 
-public interface ISessionCurrent
+public interface ISessionDate
 {
     DateTime Now { get; }
 }

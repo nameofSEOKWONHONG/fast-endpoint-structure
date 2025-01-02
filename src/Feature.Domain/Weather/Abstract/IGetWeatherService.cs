@@ -5,5 +5,5 @@ namespace Feature.Domain.Weather.Abstract;
 
 public interface IGetWeatherService
 {
-    Task<JResults<GetWeatherResult>> HandleAsync(int id);
+    Task<JResults<GetWeatherResult>> HandleAsync(int id, CancellationToken ct = default);
 }

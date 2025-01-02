@@ -15,7 +15,7 @@ public class SessionPreProcess : IGlobalPreProcessor
             var UserName = ctx.HttpContext.User.Claims.First(m => m.Type == "UserName").Value;
             var Email = ctx.HttpContext.User.Claims.First(m => m.Type == "Email").Value;        
             session.User = new SessionUser(UserId, UserName, Email);
-            session.Current = new SessionCurrent(session.User);
+            session.Date = new SessionDate(session.User);
         } 
         
         return Task.CompletedTask;

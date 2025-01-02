@@ -10,7 +10,7 @@ public static class InfrastructureExtensions
     public static void AddInfrastructure(this IServiceCollection services)
     {
         services.AddScoped<ISessionUser, SessionUser>();
-        services.AddScoped<ISessionCurrent, SessionCurrent>();
+        services.AddScoped<ISessionDate, SessionDate>();
         services.AddScoped<ISessionContext, SessionContext>();
         services.AddSingleton<IKeyValueLoader, AwsSecretManagerLoader>();
         //services.AddSingleton<IKeyValueLoader, AzureKeyVaultLoader>();

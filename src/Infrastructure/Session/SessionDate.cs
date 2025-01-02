@@ -1,6 +1,6 @@
 namespace Infrastructure.Session;
 
-public class SessionCurrent : ISessionCurrent
+public class SessionDate : ISessionDate
 {
     public DateTime Now
     {
@@ -11,7 +11,7 @@ public class SessionCurrent : ISessionCurrent
     }
 
     private readonly ISessionUser _sessionUser;
-    public SessionCurrent(ISessionUser user)
+    public SessionDate(ISessionUser user)
     {
         _sessionUser = user;
     }

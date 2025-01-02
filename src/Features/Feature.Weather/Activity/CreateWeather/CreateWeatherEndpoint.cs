@@ -20,11 +20,11 @@ public class CreateWeatherEndpoint : Endpoint<CreateWeatherForecastRequest, JRes
     
     public override void Configure()
     {
-        Post("/api/weatherforecast");
+        Post("/api/weather");
     }
 
     public override async Task HandleAsync(CreateWeatherForecastRequest req, CancellationToken ct)
     {
-        this.Response = await _service.HandleAsync(req);
+        this.Response = await _service.HandleAsync(req, ct);
     }
 }

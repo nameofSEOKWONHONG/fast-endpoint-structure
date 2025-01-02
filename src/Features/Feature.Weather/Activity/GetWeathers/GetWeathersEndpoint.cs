@@ -19,7 +19,7 @@ public class GetWeathersEndpoint : Endpoint<GetWeathersRequest, JPaginatedResult
     /// </summary>
     public override void Configure()
     {
-        Get("/api/weatherforecast/{pageno}/{pageSize}");
+        Get("/api/weather/{pageno}/{pageSize}");
         Roles("Admin");
     }
 
