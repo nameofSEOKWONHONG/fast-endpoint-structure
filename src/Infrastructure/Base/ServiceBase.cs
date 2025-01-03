@@ -1,24 +1,23 @@
 using Infrastructure.Session;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Base;
 
-public class ServiceBase<TSelf> : DisposeBase
+public abstract class ServiceBase<TSelf> : DisposeBase
     where TSelf : class
 {
     protected ILogger Logger;
     protected ISessionContext SessionContext;
-    public ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext)
+
+    protected ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext)
     {
         Logger = logger;
         SessionContext = sessionContext;
     }
 }
 
-public class ServiceBase<TSelf, TDbContext> : ServiceBase<TSelf> 
+public abstract class ServiceBase<TSelf, TDbContext> : ServiceBase<TSelf> 
     where TSelf : class
-    where TDbContext : DbContext
 {
     protected TDbContext DbContext;
     
@@ -28,7 +27,7 @@ public class ServiceBase<TSelf, TDbContext> : ServiceBase<TSelf>
     /// <param name="logger"></param>
     /// <param name="sessionContext"></param>
     /// <param name="dbContext"></param>
-    public ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext, TDbContext dbContext) : base(logger, sessionContext)
+    protected ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext, TDbContext dbContext) : base(logger, sessionContext)
     {
         DbContext = dbContext;
     }
@@ -38,8 +37,24 @@ public class ServiceBase<TSelf, TDbContext> : ServiceBase<TSelf>
     /// </summary>
     /// <param name="logger"></param>
     /// <param name="dbContext"></param>
-    public ServiceBase(ILogger<TSelf> logger, TDbContext dbContext): this(logger,null, dbContext)
+    protected ServiceBase(ILogger<TSelf> logger, TDbContext dbContext): this(logger,null, dbContext)
     {
         
     }    
+}
+
+public abstract class ServiceBase<TSelf, TDbContext, TRequest, TResult> : ServiceBase<TSelf, TDbContext>
+    where TSelf : class
+{
+    protected ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext, TDbContext dbContext) : base(logger, sessionContext, dbContext)
+    {
+        DbContext = dbContext;
+    }
+
+    protected ServiceBase(ILogger<TSelf> logger, TDbContext dbContext) : base(logger, dbContext)
+    {
+        DbContext = dbContext;
+    }
+    
+    public abstract Task<TResult> HandleAsync(TRequest request, CancellationToken cancellationToken);
 }

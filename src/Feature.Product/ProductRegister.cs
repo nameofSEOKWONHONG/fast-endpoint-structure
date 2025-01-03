@@ -10,9 +10,11 @@ namespace Feature.Product;
 
 public static class ProductRegister
 {
-    public static void AddProduct(this WebApplicationBuilder builder)
+    public static void AddProductFeature(this WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<ICreatePlanService, CreatePlanService>();
+        builder.Services.AddScoped<IGetPlanService, GetPlanService>();
+        builder.Services.AddScoped<IModifyPlanService, ModifyPlanService>();
         
         builder.Services
             .AddDbContext<ProductDbContext>((s, options) =>

@@ -1,7 +1,7 @@
 ﻿using eXtensionSharp;
 using Feature.Domain.Base;
-using Feature.Domain.Product;
 using Feature.Domain.Product.Abstract;
+using Feature.Domain.Product.Requests;
 using Feature.Product.Core;
 using Feature.Product.Plan.Entities;
 using Infrastructure.Base;
@@ -25,18 +25,18 @@ public class CreatePlanService : ServiceBase<CreatePlanService, ProductDbContext
     }
 
 
-    public async Task<JResults<long>> HandleAsync(CreatePlanRequest request, CancellationToken ct)
+    public async Task<JResults<long>> HandleAsync(PlanDto dto, CancellationToken ct)
     {
-        var exists = await this.DbContext.ProductPlans.FirstOrDefaultAsync(m => m.Id == request.Id, ct);
-        if(exists.xIsEmpty()) return await JResults<long>.FailAsync("No product plan exists");
+        var exists = await this.DbContext.ProductPlans.FirstOrDefaultAsync(m => m.Id == dto.Id, ct);
+        if(exists.xIsEmpty()) return await JResults<long>.FailAsync("Already product plan exists");
 
-        var addItem = request.RequestToPlan();
+        var addItem = dto.RequestToPlan();
 
         await this.DbContext.ProductPlans.AddAsync(addItem!, ct);
         await this.DbContext.SaveChangesAsync(ct);
 
-        var approvalLines = request.ApprovalLines
-            .Select(line => new ApprovalLine()
+        var approvalLines = dto.ApprovalLines
+            .Select(line => new PlanApprovalLine()
             {
                 ProductPlanId = addItem.Id, UserId = line.UserId, CreatedBy = SessionContext.User.UserId,
                 CreatedOn = SessionContext.Date.Now
@@ -52,5 +52,5 @@ public class CreatePlanService : ServiceBase<CreatePlanService, ProductDbContext
 [Mapper]
 public static partial class PlanMapper
 {
-    public static partial ProductPlan RequestToPlan(this CreatePlanRequest request);
+    public static partial ProductPlan RequestToPlan(this PlanDto dto);
 }

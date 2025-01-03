@@ -4,7 +4,7 @@ using Feature.Domain.Weather.Abstract;
 using Feature.Domain.Weather.Request;
 using Feature.Domain.Weather.Result;
 
-namespace Feature.Weather.Activity.GetWeathers;
+namespace Feature.Weather.Endpoints;
 
 public class GetWeathersEndpoint : Endpoint<GetWeathersRequest, JPaginatedResult<GetWeatherResult>>
 {

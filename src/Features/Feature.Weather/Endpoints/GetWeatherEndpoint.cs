@@ -3,7 +3,7 @@ using Feature.Domain.Base;
 using Feature.Domain.Weather.Abstract;
 using Feature.Domain.Weather.Result;
 
-namespace Feature.Weather.Activity.GetWeather;
+namespace Feature.Weather.Endpoints;
 
 public class GetWeatherEndpoint : EndpointWithoutRequest<JResults<GetWeatherResult>>
 {

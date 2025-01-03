@@ -6,7 +6,7 @@ using Infrastructure.Session;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Feature.Weather.Activity.InitializeWeather;
+namespace Feature.Weather.Services;
 
 public interface IInitializeWeatherService
 {

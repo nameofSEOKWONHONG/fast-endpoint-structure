@@ -1,10 +1,8 @@
 using eXtensionSharp;
 using Feature.Domain.Weather.Abstract;
-using Feature.Weather.Activity.CreateWeather;
-using Feature.Weather.Activity.GetWeather;
-using Feature.Weather.Activity.GetWeathers;
-using Feature.Weather.Activity.InitializeWeather;
 using Feature.Weather.Core;
+using Feature.Weather.Repositories;
+using Feature.Weather.Services;
 using Infrastructure.KeyValueManager;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;

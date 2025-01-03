@@ -4,12 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Base;
 
-public interface IRepositoryBase
-{
-    
-}
-
-public class RepositoryBase<TSelf> : DisposeBase, IRepositoryBase
+public class RepositoryBase<TSelf> : DisposeBase
     where TSelf : class
 {
     protected ILogger Logger;

@@ -4,6 +4,7 @@ using Microsoft.OpenApi;
 using FastEndpointApi.OpenApi;
 using Feature.Account;
 using Feature.Pdf;
+using Feature.Product;
 using Feature.Weather;
 using Infrastructure;
 using Infrastructure.Session;
@@ -38,6 +39,7 @@ builder.Services.AddInfrastructure();
 builder.AddWeatherFeature();
 builder.AddAccountFeature();
 builder.AddPdfFeature();
+builder.AddProductFeature();
 
 #endregion
 
@@ -69,7 +71,10 @@ app.UseAuthentication() //add this
     {
         c.Endpoints.Configurator = ep =>
         {
-            ep.PreProcessor<SessionPreProcess>(Order.Before);
+            if (!ep.AllowAnyClaim || !ep.AllowAnyPermission)
+            {
+                ep.PreProcessor<SessionPreProcess>(Order.Before);    
+            }
         };
     })
     ;

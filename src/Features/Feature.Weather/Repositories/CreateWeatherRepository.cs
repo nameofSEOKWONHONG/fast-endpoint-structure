@@ -6,7 +6,7 @@ using Infrastructure.Base;
 using Infrastructure.Session;
 using Microsoft.Extensions.Logging;
 
-namespace Feature.Weather.Activity.CreateWeather;
+namespace Feature.Weather.Repositories;
 
 public class CreateWeatherRepository : RepositoryBase<CreateWeatherRepository, WeatherDbContext, CreateWeatherForecastRequest, bool>, ICreateWeatherRepository
 {

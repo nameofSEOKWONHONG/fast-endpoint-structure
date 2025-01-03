@@ -1,6 +1,6 @@
-﻿namespace Feature.Domain.Product;
+﻿namespace Feature.Domain.Product.Requests;
 
-public class CreatePlanRequest
+public class PlanDto
 {
     public long Id { get; set; }
     public string Title { get; set; }
@@ -9,10 +9,10 @@ public class CreatePlanRequest
     public string Description { get; set; }
     public double Price { get; set; }
     public string Step { get; set; } 
-    public List<ApprovalLineRequest> ApprovalLines { get; set; }
+    public List<ApprovalLineDto> ApprovalLines { get; set; }
 }
 
-public class ApprovalLineRequest
+public class ApprovalLineDto
 {
     public string UserId { get; set; }
 }

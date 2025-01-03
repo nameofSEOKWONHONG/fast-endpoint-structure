@@ -19,10 +19,10 @@ public class ProductDbContext : DbContextBase<ProductDbContext>
         modelBuilder.HasDefaultSchema("product");
         this.OnModelCreating(modelBuilder, [
             new ProductPlanBuilder(),
-            new ApprovalLineBuilder()
+            new PlanApprovalLineBuilder()
         ]);
     }
     
     public DbSet<ProductPlan> ProductPlans { get; set; }
-    public DbSet<ApprovalLine> ApprovalLines { get; set; }
+    public DbSet<PlanApprovalLine> ApprovalLines { get; set; }
 }

@@ -8,10 +8,16 @@ using Infrastructure.Session;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Feature.Weather.Activity.GetWeathers;
+namespace Feature.Weather.Services;
 
 public class GetWeathersService : ServiceBase<GetWeathersService, WeatherDbContext>, IGetWeathersService
 {
+    /// <summary>
+    /// ctor
+    /// </summary>
+    /// <param name="logger"></param>
+    /// <param name="sessionContext"></param>
+    /// <param name="dbContext"></param>
     public GetWeathersService(ILogger<GetWeathersService> logger, ISessionContext sessionContext, WeatherDbContext dbContext) : base(logger, sessionContext, dbContext)
     {
     }
