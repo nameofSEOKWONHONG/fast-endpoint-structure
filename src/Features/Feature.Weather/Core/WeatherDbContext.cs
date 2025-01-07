@@ -13,10 +13,7 @@ public class WeatherDbContext : DbContextBase<WeatherDbContext>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("example");
-        this.OnModelCreating(modelBuilder, new List<IEntityBuilderBase>()
-        {
-            new WeatherForecastBuilder()
-        });
+        modelBuilder.ApplyConfiguration(new WeatherForecastConfiguration());
     }
     
     public DbSet<WeatherForecast> WeatherForecasts { get; set; }

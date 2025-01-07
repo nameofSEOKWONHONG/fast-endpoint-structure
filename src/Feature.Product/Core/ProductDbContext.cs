@@ -17,10 +17,8 @@ public class ProductDbContext : DbContextBase<ProductDbContext>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("product");
-        this.OnModelCreating(modelBuilder, [
-            new ProductPlanBuilder(),
-            new PlanApprovalLineBuilder()
-        ]);
+        modelBuilder.ApplyConfiguration(new ProductPlanConfiguration());
+        modelBuilder.ApplyConfiguration(new PlanApprovalLineConfiguration());
     }
     
     public DbSet<ProductPlan> ProductPlans { get; set; }

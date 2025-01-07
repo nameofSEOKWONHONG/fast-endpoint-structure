@@ -1,6 +1,7 @@
 ﻿using Infrastructure.EF;
 using Infrastructure.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Feature.Weather.Entities;
 
@@ -27,17 +28,13 @@ public class WeatherForecast : EntityBase
     }
 }
 
-public class WeatherForecastBuilder : EntityBuilderBase<WeatherForecast>
+internal class WeatherForecastConfiguration : IEntityTypeConfiguration<WeatherForecast>
 {
-    public override void Build(ModelBuilder builder)
+    public void Configure(EntityTypeBuilder<WeatherForecast> builder)
     {
-        builder.Entity<WeatherForecast>(e =>
-        {
-            e.ToTable(nameof(WeatherForecast), "example");
-            e.HasKey(x => x.Id);
-            e.Property(x => x.Id).ValueGeneratedOnAdd();
-            e.Property(m => m.Summary).HasMaxLength(100);
-        });
-        base.Build(builder);
+        builder.ToTable($"{nameof(WeatherForecast)}s", "example");
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.Property(m => m.Summary).HasMaxLength(100);
     }
 }

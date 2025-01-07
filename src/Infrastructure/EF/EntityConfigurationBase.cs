@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.EF;
 
-public abstract class EntityBuilderBase<T> : IEntityBuilderBase
+public abstract class EntityConfigurationBase<T> : IEntityBuilderBase
     where T : EntityBase
 {
     public virtual void Build(ModelBuilder builder)

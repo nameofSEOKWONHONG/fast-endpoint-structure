@@ -22,15 +22,15 @@ public class GetWeathersService : ServiceBase<GetWeathersService, WeatherDbConte
     {
     }
 
-    public async Task<JPaginatedResult<GetWeatherResult>> HandleAsync(GetWeathersRequest request)
+    public async Task<JPaginatedResult<GetWeatherResult>> HandleAsync(GetWeathersRequest request, CancellationToken ct)
     {
-        var total = await this.DbContext.WeatherForecasts.CountAsync();
+        var total = await this.DbContext.WeatherForecasts.CountAsync(cancellationToken: ct);
         var result = await this.DbContext.WeatherForecasts
             .AsNoTracking()
             .Skip((request.PageNo - 1) * request.PageSize)
             .Take(request.PageSize)
             .Select(m => new GetWeatherResult(m.Id, m.Date, m.TemperatureC, m.Summary))
-            .ToListAsync();
+            .ToListAsync(cancellationToken: ct);
         
         return await JPaginatedResult<GetWeatherResult>.SuccessAsync(result, total, request.PageNo, request.PageSize);
     }

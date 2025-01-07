@@ -4,7 +4,6 @@ using Feature.Domain.Weather.Result;
 
 namespace Feature.Domain.Weather.Abstract;
 
-public interface IGetWeathersService
+public interface IGetWeathersService: IServiceImpl<GetWeathersRequest, JPaginatedResult<GetWeatherResult>>
 {
-    Task<JPaginatedResult<GetWeatherResult>> HandleAsync(GetWeathersRequest request);
 }

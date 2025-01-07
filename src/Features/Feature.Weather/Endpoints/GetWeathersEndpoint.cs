@@ -25,6 +25,6 @@ public class GetWeathersEndpoint : Endpoint<GetWeathersRequest, JPaginatedResult
 
     public override async Task HandleAsync(GetWeathersRequest req, CancellationToken ct)
     {
-        this.Response = await _service.HandleAsync(req);
+        this.Response = await _service.HandleAsync(req, ct);
     }
 }

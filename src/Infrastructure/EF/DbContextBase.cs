@@ -20,7 +20,5 @@ public abstract class DbContextBase<T> : DbContext
         {
             builder.Build(modelBuilder);
         }
-        
-        base.OnModelCreating(modelBuilder);
     }
 }

@@ -3,7 +3,6 @@ using Feature.Domain.Weather.Result;
 
 namespace Feature.Domain.Weather.Abstract;
 
-public interface IGetWeatherService
+public interface IGetWeatherService : IServiceImpl<int, JResults<GetWeatherResult>>
 {
-    Task<JResults<GetWeatherResult>> HandleAsync(int id, CancellationToken ct = default);
 }
