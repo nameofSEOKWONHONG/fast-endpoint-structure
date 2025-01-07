@@ -15,7 +15,7 @@ public static class WeatherRegister
 {
     public static void AddWeatherFeature(this WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<ICreateWeatherRepository, CreateWeatherRepository>();
+        builder.Services.AddScoped<IWeatherRepository, WeatherRepository>();
         builder.Services.AddScoped<ICreateWeatherService, CreateWeatherService>();
         builder.Services.AddScoped<IGetWeatherService, GetWeatherService>();
         builder.Services.AddScoped<IGetWeathersService, GetWeathersService>();

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Feature.Weather.Repositories;
 
-public class CreateWeatherRepository : RepositoryBase<CreateWeatherRepository, WeatherDbContext, CreateWeatherForecastRequest, bool>, ICreateWeatherRepository
+public class WeatherRepository : RepositoryBase<WeatherRepository, WeatherDbContext>, IWeatherRepository
 {
     /// <summary>
     /// ctor
@@ -16,11 +16,11 @@ public class CreateWeatherRepository : RepositoryBase<CreateWeatherRepository, W
     /// <param name="logger"></param>
     /// <param name="sessionContext"></param>
     /// <param name="dbContext"></param>
-    public CreateWeatherRepository(ILogger<CreateWeatherRepository> logger, ISessionContext sessionContext, WeatherDbContext dbContext) : base(logger, sessionContext, dbContext)
+    public WeatherRepository(ILogger<WeatherRepository> logger, ISessionContext sessionContext, WeatherDbContext dbContext) : base(logger, sessionContext, dbContext)
     {
     }
 
-    public override async Task<bool> HandleAsync(CreateWeatherForecastRequest request, CancellationToken cancellationToken)
+    public async Task<bool> Insert(CreateWeatherForecastRequest request, CancellationToken cancellationToken)
     {
         var newItem = new WeatherForecast(0, request.Date, request.TemperatureC, request.Summary, "TEST", DateTime.Now);
         await this.DbContext.WeatherForecasts.AddAsync(newItem, cancellationToken);

@@ -1,6 +1,7 @@
 ﻿using eXtensionSharp;
 using Feature.Account.Core;
 using Feature.Account.Member.Services;
+using Feature.Domain.Member.Abstract;
 using Infrastructure.KeyValueManager;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;

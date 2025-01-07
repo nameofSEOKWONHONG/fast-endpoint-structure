@@ -17,7 +17,7 @@ public class RepositoryBase<TSelf> : DisposeBase
     }
 }
 
-public abstract class RepositoryBase<TSelf, TDbContext, TRequest, TResult> : RepositoryBase<TSelf> 
+public abstract class RepositoryBase<TSelf, TDbContext> : RepositoryBase<TSelf> 
     where TSelf : class
     where TDbContext : DbContext
 {
@@ -26,6 +26,4 @@ public abstract class RepositoryBase<TSelf, TDbContext, TRequest, TResult> : Rep
     {
         DbContext = dbContext;
     }
-
-    public abstract Task<TResult> HandleAsync(TRequest request, CancellationToken cancellationToken);
 }

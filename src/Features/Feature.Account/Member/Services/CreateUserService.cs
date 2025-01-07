@@ -2,17 +2,13 @@
 using Feature.Account.Core;
 using Feature.Domain.Base;
 using Feature.Domain.Member;
+using Feature.Domain.Member.Abstract;
 using Infrastructure.Base;
 using Infrastructure.Session;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Feature.Account.Member.Services;
-
-public interface ICreateUserService
-{
-    Task<JResults<string>> HandleAsync(CreateUserRequest req, CancellationToken ct);
-}
 
 public class CreateUserService : ServiceBase<CreateUserService, AppDbContext>, ICreateUserService
 {
