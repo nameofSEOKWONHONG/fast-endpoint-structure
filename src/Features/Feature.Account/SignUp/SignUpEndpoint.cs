@@ -3,10 +3,13 @@ using Feature.Account.Member.Services;
 using Feature.Domain.Auth;
 using Feature.Domain.Base;
 using Feature.Domain.Member;
+using Feature.Domain.Member.Abstract;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace Feature.Account.SignUp;
 
-public class SignUpEndpoint : Endpoint<SignUpRequest, JResults<bool>>
+public class SignUpEndpoint : Endpoint<SignUpRequest, JResults<string>>
 {
     private readonly ICreateUserService _service;
 
@@ -19,6 +22,8 @@ public class SignUpEndpoint : Endpoint<SignUpRequest, JResults<bool>>
     {
         Post("/api/auth/signup");
         AllowAnonymous();
+        Validator<SignUpRequestValidator>();
+        DontThrowIfValidationFails();
     }
 
     public override async Task HandleAsync(SignUpRequest req, CancellationToken ct)
@@ -30,7 +35,13 @@ public class SignUpEndpoint : Endpoint<SignUpRequest, JResults<bool>>
             UserName = req.UserName,
             ConfirmPassword = req.ConfirmPassword,
         };
-        var result = await _service.HandleAsync(request, ct);
-        this.Response = await JResults<bool>.SuccessAsync(result.Succeeded);
+        
+        if (ValidationFailed)
+        {
+            var map = ValidationFailures.Select(m => new KeyValuePair<string, string>(m.PropertyName, m.ErrorMessage)).ToDictionary();
+            this.Response = await JResults<string>.FailAsync(map);
+            return;
+        }
+        this.Response = await _service.HandleAsync(request, ct);
     }
 }

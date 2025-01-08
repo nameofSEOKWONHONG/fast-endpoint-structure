@@ -10,5 +10,9 @@
       <ProjectReference Include="..\..\Feature.Domain\Feature.Domain.csproj" />
       <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
     
 </Project>

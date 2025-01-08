@@ -10,4 +10,8 @@
       <Folder Include="Product\Results\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="FastEndpoints" />
+    </ItemGroup>
+
 </Project>

@@ -41,12 +41,12 @@ public static class WeatherRegister
 
     public static void UseWeatherFeature(this WebApplication app)
     {
-        var task = Task.Run(async () =>
-        {
-            using var scope = app.Services.CreateScope();
-            var service = scope.ServiceProvider.GetRequiredService<IInitializeWeatherService>();
-            await service.HandleAsync();
-        });
-        task.Wait();
+        // var task = Task.Run(async () =>
+        // {
+        //     using var scope = app.Services.CreateScope();
+        //     var service = scope.ServiceProvider.GetRequiredService<IInitializeWeatherService>();
+        //     await service.HandleAsync();
+        // });
+        // task.Wait();
     }
 }

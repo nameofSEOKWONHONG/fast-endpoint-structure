@@ -24,10 +24,12 @@ public class CreateUserService : ServiceBase<CreateUserService, AppDbContext>, I
 
     public async Task<JResults<string>> HandleAsync(CreateUserRequest req, CancellationToken ct)
     {
-        if(req.Password != req.ConfirmPassword) return await JResults<string>.SuccessAsync("Wrong input");
+        if(req.Password != req.ConfirmPassword) return await JResults<string>.FailAsync("Wrong input");
+        if(req.Email.xIsEmpty()) return await JResults<string>.FailAsync("Email is required");
+        if(req.UserName.xIsEmpty()) return await JResults<string>.FailAsync("Username is required");
         
         var exists = await this.DbContext.Users.FirstOrDefaultAsync(m => m.Email == req.Email, ct);
-        if(exists.xIsNotEmpty()) return await JResults<string>.SuccessAsync("Already registered");
+        if(exists.xIsNotEmpty()) return await JResults<string>.FailAsync("Already registered");
         
         var hashedPassword = BCrypt.Net.BCrypt.HashPassword(req.Password);
         var user = new Entities.User()

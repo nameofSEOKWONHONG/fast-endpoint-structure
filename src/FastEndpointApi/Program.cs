@@ -16,6 +16,7 @@ DotNetEnv.Env.Load("./.env");
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors();
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi(options =>
@@ -48,23 +49,21 @@ builder.AddProductFeature();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app
-        .MapScalarApiReference(options =>
-        {
-            options.WithOpenApiRoutePattern("/openapi/v1.json");
-            options.Theme = ScalarTheme.None;
-            options.Authentication = 
-                new ScalarAuthenticationOptions
-                {
-                    PreferredSecurityScheme = FastEndpointApi.OpenApi.Constants.OpenApi.SecuritySchemeBearer
-                };
-        })
-        .AllowAnonymous();
-}
+app.MapOpenApi();
+app
+    .MapScalarApiReference(options =>
+    {
+        options.WithOpenApiRoutePattern("/openapi/v1.json");
+        options.Theme = ScalarTheme.None;
+        options.Authentication = 
+            new ScalarAuthenticationOptions
+            {
+                PreferredSecurityScheme = FastEndpointApi.OpenApi.Constants.OpenApi.SecuritySchemeBearer
+            };
+    })
+    .AllowAnonymous();
 
+app.UseCors(b => b.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 app.UseAuthentication() //add this
     .UseAuthorization() //add this
     .UseFastEndpoints(c =>
