@@ -87,3 +87,21 @@ app.UseInfrastructure();
 app.Run();
 
 #endregion
+
+/*
+ * Domain
+ *   | 
+ *   ----> Infra 
+ *          |
+ *          -----> Features
+ *                    |
+ *                    -------> WEB API (JWT,???)
+ *                                |
+ *                                <---------> SPA - React, Angular, Vue, Svelte -
+ *                    |
+ *                    -------> WEB SERVER (BLAZOR SERVER) (Cookie - SESSION)
+ *   |
+ *   -----> WEB (BLAZOR WASM) - (COOKIE, JWT)
+ *   |
+ *   -----> DESKTOP, MAUI (MOBILE) - (JWT)
+*/
