@@ -2,7 +2,6 @@ using eXtensionSharp;
 using Feature.Domain.Base;
 using Feature.Domain.Product.Abstract;
 using Feature.Domain.Product.Requests;
-using Feature.Product.Core;
 using Feature.Product.Plan.Entities;
 using Infrastructure.Base;
 using Infrastructure.Session;

@@ -2,7 +2,7 @@
 using Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 
-namespace Feature.Weather.Core;
+namespace Feature.Weather;
 
 public class WeatherDbContext : DbContextBase<WeatherDbContext>
 {
@@ -13,7 +13,7 @@ public class WeatherDbContext : DbContextBase<WeatherDbContext>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("example");
-        modelBuilder.ApplyConfiguration(new WeatherForecastConfiguration());
+        modelBuilder.ApplyConfiguration(new WeatherForecast.WeatherForecastConfiguration());
     }
     
     public DbSet<WeatherForecast> WeatherForecasts { get; set; }

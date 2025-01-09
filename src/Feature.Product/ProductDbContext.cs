@@ -2,7 +2,7 @@
 using Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 
-namespace Feature.Product.Core;
+namespace Feature.Product;
 
 public class ProductDbContext : DbContextBase<ProductDbContext>
 {

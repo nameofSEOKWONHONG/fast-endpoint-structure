@@ -26,15 +26,16 @@ public class WeatherForecast : EntityBase
         CreatedBy = createdBy;
         CreatedOn = createdOn;
     }
-}
-
-internal class WeatherForecastConfiguration : IEntityTypeConfiguration<WeatherForecast>
-{
-    public void Configure(EntityTypeBuilder<WeatherForecast> builder)
+    
+    internal class WeatherForecastConfiguration : IEntityTypeConfiguration<WeatherForecast>
     {
-        builder.ToTable($"{nameof(WeatherForecast)}s", "example");
-        builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.Property(m => m.Summary).HasMaxLength(100);
+        public void Configure(EntityTypeBuilder<WeatherForecast> builder)
+        {
+            builder.ToTable($"{nameof(WeatherForecast)}s", "example");
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(m => m.Summary).HasMaxLength(100);
+        }
     }
 }
+

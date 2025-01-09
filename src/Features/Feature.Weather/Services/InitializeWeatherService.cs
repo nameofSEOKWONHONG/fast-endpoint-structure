@@ -1,5 +1,4 @@
 ﻿using eXtensionSharp;
-using Feature.Weather.Core;
 using Feature.Weather.Entities;
 using Infrastructure.Base;
 using Infrastructure.Session;
@@ -13,20 +12,22 @@ public interface IInitializeWeatherService
     Task HandleAsync();
 }
 
-public class InitializeWeatherService: ServiceBase<InitializeWeatherService, WeatherDbContext>, IInitializeWeatherService
+public class InitializeWeatherService: ServiceBase<InitializeWeatherService>, IInitializeWeatherService
 {
     string[] summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
     
-    public InitializeWeatherService(ILogger<InitializeWeatherService> logger, ISessionContext sessionContext, WeatherDbContext dbContext) : base(logger, sessionContext, dbContext)
+    private readonly WeatherDbContext _weatherDbContext;
+    public InitializeWeatherService(ILogger<InitializeWeatherService> logger, ISessionContext sessionContext, WeatherDbContext dbContext) : base(logger, sessionContext)
     {
+        _weatherDbContext = dbContext;
     }
 
     public async Task HandleAsync()
     {
-        var item = await this.DbContext.WeatherForecasts.FirstOrDefaultAsync();
+        var item = await this._weatherDbContext.WeatherForecasts.FirstOrDefaultAsync();
         if (item.xIsEmpty())
         {
             var items = Enumerable.Range(1, 50).Select(index =>
@@ -41,8 +42,8 @@ public class InitializeWeatherService: ServiceBase<InitializeWeatherService, Wea
                     ))
                 .ToList();
             
-            await this.DbContext.WeatherForecasts.AddRangeAsync(items);
-            await this.DbContext.SaveChangesAsync();
+            await this._weatherDbContext.WeatherForecasts.AddRangeAsync(items);
+            await this._weatherDbContext.SaveChangesAsync();
         }
     }
 }

@@ -4,7 +4,7 @@ using Feature.Domain.Weather.Request;
 namespace Feature.Domain.Weather.Abstract;
 
 
-public interface ICreateWeatherService : IServiceImpl<CreateWeatherForecastRequest, JResults<bool>>
+public interface ICreateWeatherService : IServiceImpl<WeatherForecastDto, JResults<int>>
 {
     
 }

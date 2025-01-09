@@ -22,3 +22,14 @@ public abstract class EntityConfigurationBase<T> : IEntityBuilderBase
         });
     }
 }
+
+public static class EntityConfigurationExtensions
+{
+    public static void xApplyConfiguration(this ModelBuilder builder, IEntityBuilderBase[] configurations)
+    {
+        foreach (var configuration in configurations)
+        {
+            configuration.Build(builder);
+        }
+    }
+}

@@ -1,7 +1,6 @@
 ﻿using eXtensionSharp;
 using FastEndpoints;
 using FastEndpoints.Security;
-using Feature.Account.Core;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 

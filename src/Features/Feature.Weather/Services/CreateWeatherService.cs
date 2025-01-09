@@ -1,7 +1,6 @@
 ﻿using Feature.Domain.Base;
 using Feature.Domain.Weather.Abstract;
 using Feature.Domain.Weather.Request;
-using Feature.Weather.Core;
 using Feature.Weather.Entities;
 using Infrastructure.Base;
 using Infrastructure.Session;
@@ -9,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Feature.Weather.Services;
 
-public class CreateWeatherService : ServiceBase<CreateWeatherService, WeatherDbContext>, ICreateWeatherService
+public class CreateWeatherService : ServiceRepoBase<CreateWeatherService, IWeatherRepository, WeatherForecastDto, JResults<int>>, ICreateWeatherService
 {
     /// <summary>
     /// ctor
@@ -17,15 +16,13 @@ public class CreateWeatherService : ServiceBase<CreateWeatherService, WeatherDbC
     /// <param name="logger"></param>
     /// <param name="sessionContext"></param>
     /// <param name="dbContext"></param>
-    public CreateWeatherService(ILogger<CreateWeatherService> logger, ISessionContext sessionContext, WeatherDbContext dbContext) : base(logger, sessionContext, dbContext)
+    public CreateWeatherService(ILogger<CreateWeatherService> logger, ISessionContext sessionContext, IWeatherRepository repository) : base(logger, sessionContext, repository)
     {
     }
 
-    public async Task<JResults<bool>> HandleAsync(CreateWeatherForecastRequest request, CancellationToken cancellationToken)
+    public override async Task<JResults<int>> HandleAsync(WeatherForecastDto dto, CancellationToken cancellationToken)
     {
-        var newItem = new WeatherForecast(0, request.Date, request.TemperatureC, request.Summary, this.SessionContext.User.UserName, this.SessionContext.Date.Now);
-        await this.DbContext.WeatherForecasts.AddAsync(newItem, cancellationToken);
-        await this.DbContext.SaveChangesAsync(cancellationToken);
-        return await JResults<bool>.SuccessAsync(newItem.Id > 0);
+        var result = await this.Repository.Insert(dto, cancellationToken);
+        return await JResults<int>.SuccessAsync(result);
     }
 }

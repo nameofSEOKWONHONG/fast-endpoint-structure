@@ -2,7 +2,7 @@
 using Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 
-namespace Feature.Account.Core;
+namespace Feature.Account;
 
 public class AppDbContext : DbContextBase<AppDbContext>
 {

@@ -1,5 +1,4 @@
 ﻿using Feature.Domain.Product.Abstract;
-using Feature.Product.Core;
 using Feature.Product.Plan.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;

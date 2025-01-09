@@ -1,7 +1,6 @@
 using Feature.Domain.Base;
 using Feature.Domain.Product.Abstract;
 using Feature.Domain.Product.Requests;
-using Feature.Product.Core;
 using Infrastructure.Base;
 using Infrastructure.Session;
 using Microsoft.EntityFrameworkCore;

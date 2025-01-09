@@ -2,7 +2,6 @@
 using Feature.Domain.Base;
 using Feature.Domain.Product.Abstract;
 using Feature.Domain.Product.Requests;
-using Feature.Product.Core;
 using Feature.Product.Plan.Entities;
 using Infrastructure.Base;
 using Infrastructure.Session;
@@ -12,7 +11,7 @@ using Riok.Mapperly.Abstractions;
 
 namespace Feature.Product.Plan.Services;
 
-public class CreatePlanService : ServiceBase<CreatePlanService, ProductDbContext>, ICreatePlanService
+public class CreatePlanService : ServiceBase<CreatePlanService, ProductDbContext, PlanDto, JResults<long>>, ICreatePlanService
 {
     /// <summary>
     /// ctor
@@ -25,7 +24,7 @@ public class CreatePlanService : ServiceBase<CreatePlanService, ProductDbContext
     }
 
 
-    public async Task<JResults<long>> HandleAsync(PlanDto dto, CancellationToken ct)
+    public override async Task<JResults<long>> HandleAsync(PlanDto dto, CancellationToken ct)
     {
         var exists = await this.DbContext.ProductPlans.FirstOrDefaultAsync(m => m.Id == dto.Id, ct);
         if(exists.xIsEmpty()) return await JResults<long>.FailAsync("Already product plan exists");

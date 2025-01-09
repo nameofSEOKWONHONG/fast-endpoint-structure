@@ -3,58 +3,49 @@ using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Base;
 
-public abstract class ServiceBase<TSelf> : DisposeBase
+public abstract class ServiceBase<TSelf> : ServiceCore<TSelf>
     where TSelf : class
 {
     protected ILogger Logger;
     protected ISessionContext SessionContext;
 
-    protected ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext)
+    protected ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext) : base(logger)
     {
-        Logger = logger;
         SessionContext = sessionContext;
     }
 }
 
-public abstract class ServiceBase<TSelf, TDbContext> : ServiceBase<TSelf> 
+public abstract class ServiceBase<TSelf, TRequest, TResult> : ServiceCore<TSelf>
+    where TSelf : class
+{
+    protected ILogger Logger;
+    protected ISessionContext SessionContext;
+
+    protected ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext) : base(logger)
+    {
+        SessionContext = sessionContext;
+    }
+    
+    public abstract Task<TResult> HandleAsync(TRequest request, CancellationToken cancellationToken);
+}
+
+public abstract class ServiceBase<TSelf, TDbContext, TRequest, TResult> : ServiceBase<TSelf, TRequest, TResult>
     where TSelf : class
 {
     protected TDbContext DbContext;
-    
-    /// <summary>
-    /// ctor
-    /// </summary>
-    /// <param name="logger"></param>
-    /// <param name="sessionContext"></param>
-    /// <param name="dbContext"></param>
     protected ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext, TDbContext dbContext) : base(logger, sessionContext)
     {
         DbContext = dbContext;
     }
-    
-    /// <summary>
-    /// ctor
-    /// </summary>
-    /// <param name="logger"></param>
-    /// <param name="dbContext"></param>
-    protected ServiceBase(ILogger<TSelf> logger, TDbContext dbContext): this(logger,null, dbContext)
-    {
-        
-    }    
 }
 
-public abstract class ServiceBase<TSelf, TDbContext, TRequest, TResult> : ServiceBase<TSelf, TDbContext>
+public abstract class ServiceBatchBase<TSelf, TService, TRequest, TResult> : ServiceBase<TSelf, TRequest, TResult>
     where TSelf : class
 {
-    protected ServiceBase(ILogger<TSelf> logger, ISessionContext sessionContext, TDbContext dbContext) : base(logger, sessionContext, dbContext)
-    {
-        DbContext = dbContext;
-    }
+    protected readonly TService Service;
 
-    protected ServiceBase(ILogger<TSelf> logger, TDbContext dbContext) : base(logger, dbContext)
+    protected ServiceBatchBase(ILogger<TSelf> logger, ISessionContext sessionContext, TService service) : base(logger, sessionContext)
     {
-        DbContext = dbContext;
+        Service = service;
     }
-    
-    public abstract Task<TResult> HandleAsync(TRequest request, CancellationToken cancellationToken);
 }

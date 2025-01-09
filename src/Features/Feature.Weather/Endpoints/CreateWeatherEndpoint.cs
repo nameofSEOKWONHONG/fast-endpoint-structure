@@ -5,7 +5,7 @@ using Feature.Domain.Weather.Request;
 
 namespace Feature.Weather.Endpoints;
 
-public class CreateWeatherEndpoint : Endpoint<CreateWeatherForecastRequest, JResults<bool>>
+public class CreateWeatherEndpoint : Endpoint<WeatherForecastDto, JResults<int>>
 {
     private readonly ICreateWeatherService _service;
     
@@ -23,7 +23,7 @@ public class CreateWeatherEndpoint : Endpoint<CreateWeatherForecastRequest, JRes
         Post("/api/weather");
     }
 
-    public override async Task HandleAsync(CreateWeatherForecastRequest req, CancellationToken ct)
+    public override async Task HandleAsync(WeatherForecastDto req, CancellationToken ct)
     {
         this.Response = await _service.HandleAsync(req, ct);
     }

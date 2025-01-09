@@ -1,5 +1,4 @@
 ﻿using eXtensionSharp;
-using Feature.Account.Core;
 using Feature.Domain.Base;
 using Feature.Domain.Member;
 using Feature.Domain.Member.Abstract;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Feature.Account.Member.Services;
 
-public class CreateUserService : ServiceBase<CreateUserService, AppDbContext>, ICreateUserService
+public class CreateUserService : ServiceBase<CreateUserService, AppDbContext, CreateUserRequest, JResults<string>>, ICreateUserService
 {
     /// <summary>
     /// ctor
@@ -22,7 +21,7 @@ public class CreateUserService : ServiceBase<CreateUserService, AppDbContext>, I
     {
     }
 
-    public async Task<JResults<string>> HandleAsync(CreateUserRequest req, CancellationToken ct)
+    public override async Task<JResults<string>> HandleAsync(CreateUserRequest req, CancellationToken ct)
     {
         if(req.Password != req.ConfirmPassword) return await JResults<string>.FailAsync("Wrong input");
         if(req.Email.xIsEmpty()) return await JResults<string>.FailAsync("Email is required");

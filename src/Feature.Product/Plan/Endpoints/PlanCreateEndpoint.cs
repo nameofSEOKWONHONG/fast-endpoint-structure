@@ -1,7 +1,6 @@
 ﻿using FastEndpoints;
 using Feature.Domain.Product.Abstract;
 using Feature.Domain.Product.Requests;
-using Feature.Product.Core;
 using Microsoft.Extensions.Logging;
 
 namespace Feature.Product.Plan.Endpoints;

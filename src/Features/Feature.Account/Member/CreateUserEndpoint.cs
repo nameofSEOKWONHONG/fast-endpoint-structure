@@ -1,5 +1,4 @@
-﻿using Feature.Account.Core;
-using Feature.Domain.Base;
+﻿using Feature.Domain.Base;
 using Feature.Domain.Member;
 using Feature.Domain.Member.Abstract;
 using Infrastructure.Base;

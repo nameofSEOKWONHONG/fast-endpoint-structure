@@ -1,6 +1,5 @@
 using eXtensionSharp;
 using Feature.Domain.Weather.Abstract;
-using Feature.Weather.Core;
 using Feature.Weather.Repositories;
 using Feature.Weather.Services;
 using Infrastructure.KeyValueManager;

@@ -2,7 +2,6 @@
 using Feature.Domain.Weather.Abstract;
 using Feature.Domain.Weather.Request;
 using Feature.Domain.Weather.Result;
-using Feature.Weather.Core;
 using Infrastructure.Base;
 using Infrastructure.Session;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Feature.Weather.Services;
 
-public class GetWeathersService : ServiceBase<GetWeathersService, WeatherDbContext>, IGetWeathersService
+public class GetWeathersService : ServiceBase<GetWeathersService, WeatherDbContext, GetWeathersRequest, JPaginatedResult<GetWeatherResult>>, IGetWeathersService
 {
     /// <summary>
     /// ctor
@@ -22,7 +21,7 @@ public class GetWeathersService : ServiceBase<GetWeathersService, WeatherDbConte
     {
     }
 
-    public async Task<JPaginatedResult<GetWeatherResult>> HandleAsync(GetWeathersRequest request, CancellationToken ct)
+    public override async Task<JPaginatedResult<GetWeatherResult>> HandleAsync(GetWeathersRequest request, CancellationToken ct)
     {
         var total = await this.DbContext.WeatherForecasts.CountAsync(cancellationToken: ct);
         var result = await this.DbContext.WeatherForecasts
