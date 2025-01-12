@@ -1,34 +1,14 @@
 ﻿using Confluent.Kafka;
 using eXtensionSharp;
 using Feature.Domain.Base;
+using Feature.Domain.Infra;
+using Feature.Domain.Infra.Abstract;
 using Infrastructure.Base;
 using Infrastructure.Session;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;
 
 namespace Feature.Infra.Email;
-
-public class EmailRequest
-{
-    public string Subject { get; set; }
-    public string Body { get; set; }
-    public string FromName { get; set; }
-    public string FromEmail { get; set; }
-    public string ToName { get; set; }
-    public string ToEmail { get; set; }
-    public bool IsHtml { get; set; }
-    public string Result { get; set; }
-}
-
-public class TopicConstant
-{
-    public const string EmailTopic = "email";
-}
-
-public interface ISendEmailService : IServiceImpl<EmailRequest, JResults<bool>>
-{
-    
-}
 
 public class EmailProducerService : ServiceBase<EmailProducerService, EmailRequest, JResults<bool>>, ISendEmailService
 {
