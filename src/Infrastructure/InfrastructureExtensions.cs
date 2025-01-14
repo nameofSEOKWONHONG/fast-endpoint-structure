@@ -1,4 +1,5 @@
-﻿using Infrastructure.KeyValueManager;
+﻿using Infrastructure.Files;
+using Infrastructure.KeyValueManager;
 using Infrastructure.Session;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,11 @@ public static class InfrastructureExtensions
         services.AddSingleton<IKeyValueLoader, AwsSecretManagerLoader>();
         //services.AddSingleton<IKeyValueLoader, AzureKeyVaultLoader>();
         services.AddSingleton<KeyValueLoadExecutor>();
+
+        //aws s3
+        services.AddKeyedScoped<IFileService, S3FileService>("s3");
+        //azure blob
+        services.AddKeyedScoped<IFileService, BlobFileService>("blob");
     }
 
     public static void UseInfrastructure(this WebApplication app)
