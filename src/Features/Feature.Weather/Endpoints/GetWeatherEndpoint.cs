@@ -5,7 +5,7 @@ using Feature.Domain.Weather.Result;
 
 namespace Feature.Weather.Endpoints;
 
-public class GetWeatherEndpoint : EndpointWithoutRequest<JResults<GetWeatherResult>>
+public class GetWeatherEndpoint : EndpointWithoutRequest<Results<GetWeatherResult>>
 {
     private readonly IGetWeatherService _service;
     

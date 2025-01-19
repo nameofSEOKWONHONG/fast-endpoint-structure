@@ -12,7 +12,7 @@ public class CreateBatchWeatherRequest
     public WeatherForecastDto[] Items { get; set; }
 }
 
-public class CreateBatchWeatherEndpoint : Endpoint<CreateBatchWeatherRequest, JResults<int[]>> 
+public class CreateBatchWeatherEndpoint : Endpoint<CreateBatchWeatherRequest, Results<int[]>> 
 {
     private readonly WeatherDbContext _dbContext;
     private readonly ICreateWeatherService _weatherService;
@@ -29,7 +29,7 @@ public class CreateBatchWeatherEndpoint : Endpoint<CreateBatchWeatherRequest, JR
 
     public override async Task HandleAsync(CreateBatchWeatherRequest req, CancellationToken ct)
     {
-        var list = new List<JResults<int>>();
+        var list = new List<Results<int>>();
         var tran = await this._dbContext.Database.BeginTransactionAsync(ct);
 
         try
@@ -44,12 +44,12 @@ public class CreateBatchWeatherEndpoint : Endpoint<CreateBatchWeatherRequest, JR
 
             //TODO : 반환 객체에 대해 변경해야 함.
             var items =list.Select(m => m.Data).ToArray();
-            this.Response = await JResults<int[]>.SuccessAsync(items);
+            this.Response = await Results<int[]>.SuccessAsync(items);
         }
         catch (Exception ex)
         {
             await tran.RollbackAsync(ct);
-            this.Response = await JResults<int[]>.FailAsync(ex.Message);
+            this.Response = await Results<int[]>.FailAsync(ex.Message);
         }
     }
 }

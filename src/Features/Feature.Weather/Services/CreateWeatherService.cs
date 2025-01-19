@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Feature.Weather.Services;
 
-public class CreateWeatherService : ServiceRepoBase<CreateWeatherService, IWeatherRepository, WeatherForecastDto, JResults<int>>, ICreateWeatherService
+public class CreateWeatherService : ServiceRepoBase<CreateWeatherService, IWeatherRepository, WeatherForecastDto, Results<int>>, ICreateWeatherService
 {
     /// <summary>
     /// ctor
@@ -20,9 +20,9 @@ public class CreateWeatherService : ServiceRepoBase<CreateWeatherService, IWeath
     {
     }
 
-    public override async Task<JResults<int>> HandleAsync(WeatherForecastDto dto, CancellationToken cancellationToken)
+    public override async Task<Results<int>> HandleAsync(WeatherForecastDto dto, CancellationToken cancellationToken)
     {
         var result = await this.Repository.Insert(dto, cancellationToken);
-        return await JResults<int>.SuccessAsync(result);
+        return await Results<int>.SuccessAsync(result);
     }
 }

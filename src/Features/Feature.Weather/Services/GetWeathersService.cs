@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Feature.Weather.Services;
 
-public class GetWeathersService : ServiceBase<GetWeathersService, WeatherDbContext, GetWeathersRequest, JPaginatedResult<GetWeatherResult>>, IGetWeathersService
+public class GetWeathersService : ServiceBase<GetWeathersService, WeatherDbContext, GetWeathersRequest, PaginatedResult<GetWeatherResult>>, IGetWeathersService
 {
     /// <summary>
     /// ctor
@@ -21,7 +21,7 @@ public class GetWeathersService : ServiceBase<GetWeathersService, WeatherDbConte
     {
     }
 
-    public override async Task<JPaginatedResult<GetWeatherResult>> HandleAsync(GetWeathersRequest request, CancellationToken ct)
+    public override async Task<PaginatedResult<GetWeatherResult>> HandleAsync(GetWeathersRequest request, CancellationToken ct)
     {
         var total = await this.DbContext.WeatherForecasts.CountAsync(cancellationToken: ct);
         var result = await this.DbContext.WeatherForecasts
@@ -31,6 +31,6 @@ public class GetWeathersService : ServiceBase<GetWeathersService, WeatherDbConte
             .Select(m => new GetWeatherResult(m.Id, m.Date, m.TemperatureC, m.Summary))
             .ToListAsync(cancellationToken: ct);
         
-        return await JPaginatedResult<GetWeatherResult>.SuccessAsync(result, total, request.PageNo, request.PageSize);
+        return await PaginatedResult<GetWeatherResult>.SuccessAsync(result, total, request.PageNo, request.PageSize);
     }
 }

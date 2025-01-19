@@ -7,21 +7,21 @@ using Microsoft.Extensions.Logging;
 
 namespace Feature.Weather.Services;
 
-public interface IModifyWeatherService : IServiceImpl<WeatherForecastDto, JResults<bool>>
+public interface IModifyWeatherService : IServiceImpl<WeatherForecastDto, Results<bool>>
 {
     
 }
 
-public class ModifyWeatherService : ServiceRepoBase<ModifyWeatherService, IWeatherRepository, WeatherForecastDto, JResults<bool>>, IModifyWeatherService
+public class ModifyWeatherService : ServiceRepoBase<ModifyWeatherService, IWeatherRepository, WeatherForecastDto, Results<bool>>, IModifyWeatherService
 {
     public ModifyWeatherService(ILogger<ModifyWeatherService> logger, ISessionContext sessionContext, IWeatherRepository repository) : base(logger, sessionContext, repository)
     {
     }
 
-    public override async Task<JResults<bool>> HandleAsync(WeatherForecastDto request, CancellationToken cancellationToken)
+    public override async Task<Results<bool>> HandleAsync(WeatherForecastDto request, CancellationToken cancellationToken)
     {
         var result = await this.Repository.Update(request, cancellationToken);
-        if (result) return await JResults<bool>.SuccessAsync();
-        return await JResults<bool>.FailAsync();
+        if (result) return await Results<bool>.SuccessAsync();
+        return await Results<bool>.FailAsync();
     }
 }

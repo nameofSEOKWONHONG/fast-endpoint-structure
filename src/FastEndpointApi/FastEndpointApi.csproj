@@ -17,11 +17,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Feature.Pdf\Feature.Pdf.csproj" />
-      <ProjectReference Include="..\Feature.Product\Feature.Product.csproj" />
+      <ProjectReference Include="..\Features\Feature.Healthcare\Feature.Healthcare.csproj" />
+      <ProjectReference Include="..\Features\Feature.Infra\Feature.Infra.csproj" />
+      <ProjectReference Include="..\Features\Feature.Order\Feature.Order.csproj" />
+      <ProjectReference Include="..\Features\Feature.Pdf\Feature.Pdf.csproj" />
+      <ProjectReference Include="..\Features\Feature.Product\Feature.Product.csproj" />
       <ProjectReference Include="..\Features\Feature.Account\Feature.Account.csproj" />
-      <ProjectReference Include="..\Features\Feature.Weather\Feature.Weather.csproj" />
-      <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+      <ProjectReference Include="..\Features\Feature.Weather\Feature.Weather.csproj" />     
     </ItemGroup>
 
     <ItemGroup>

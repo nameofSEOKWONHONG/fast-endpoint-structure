@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Feature.Account.Member.Services;
 
-public class CreateUserService : ServiceBase<CreateUserService, AppDbContext, CreateUserRequest, JResults<string>>, ICreateUserService
+public class CreateUserService : ServiceBase<CreateUserService, AppDbContext, CreateUserRequest, Results<string>>, ICreateUserService
 {
     /// <summary>
     /// ctor
@@ -21,14 +21,14 @@ public class CreateUserService : ServiceBase<CreateUserService, AppDbContext, Cr
     {
     }
 
-    public override async Task<JResults<string>> HandleAsync(CreateUserRequest req, CancellationToken ct)
+    public override async Task<Results<string>> HandleAsync(CreateUserRequest req, CancellationToken ct)
     {
-        if(req.Password != req.ConfirmPassword) return await JResults<string>.FailAsync("Wrong input");
-        if(req.Email.xIsEmpty()) return await JResults<string>.FailAsync("Email is required");
-        if(req.UserName.xIsEmpty()) return await JResults<string>.FailAsync("Username is required");
+        if(req.Password != req.ConfirmPassword) return await Results<string>.FailAsync("Wrong input");
+        if(req.Email.xIsEmpty()) return await Results<string>.FailAsync("Email is required");
+        if(req.UserName.xIsEmpty()) return await Results<string>.FailAsync("Username is required");
         
         var exists = await this.DbContext.Users.FirstOrDefaultAsync(m => m.Email == req.Email, ct);
-        if(exists.xIsNotEmpty()) return await JResults<string>.FailAsync("Already registered");
+        if(exists.xIsNotEmpty()) return await Results<string>.FailAsync("Already registered");
         
         var hashedPassword = BCrypt.Net.BCrypt.HashPassword(req.Password);
         var user = new Entities.User()
@@ -43,6 +43,6 @@ public class CreateUserService : ServiceBase<CreateUserService, AppDbContext, Cr
         await this.DbContext.Users.AddAsync(user, ct);
         await this.DbContext.SaveChangesAsync(ct);
         
-        return await JResults<string>.SuccessAsync(user.Id);
+        return await Results<string>.SuccessAsync(user.Id);
     }
 }

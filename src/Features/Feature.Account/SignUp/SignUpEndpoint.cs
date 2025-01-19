@@ -9,7 +9,7 @@ using FluentValidation.Results;
 
 namespace Feature.Account.SignUp;
 
-public class SignUpEndpoint : Endpoint<SignUpRequest, JResults<string>>
+public class SignUpEndpoint : Endpoint<SignUpRequest, Results<string>>
 {
     private readonly ICreateUserService _service;
 
@@ -39,7 +39,7 @@ public class SignUpEndpoint : Endpoint<SignUpRequest, JResults<string>>
         if (ValidationFailed)
         {
             var map = ValidationFailures.Select(m => new KeyValuePair<string, string>(m.PropertyName, m.ErrorMessage)).ToDictionary();
-            this.Response = await JResults<string>.FailAsync(map);
+            this.Response = await Results<string>.FailAsync(map);
             return;
         }
         this.Response = await _service.HandleAsync(request, ct);

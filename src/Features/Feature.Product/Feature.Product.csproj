@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Control\Endpoints\" />
+      <Folder Include="Control\Entities\" />
+      <Folder Include="Control\Services\" />
+      <Folder Include="Management\" />
+      <Folder Include="Maunfacture\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Feature.Domain\Feature.Domain.csproj" />
+        <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>

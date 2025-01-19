@@ -5,7 +5,7 @@ using Feature.Domain.Weather.Request;
 
 namespace Feature.Weather.Endpoints;
 
-public class CreateWeatherEndpoint : Endpoint<WeatherForecastDto, JResults<int>>
+public class CreateWeatherEndpoint : Endpoint<WeatherForecastDto, Results<int>>
 {
     private readonly ICreateWeatherService _service;
     

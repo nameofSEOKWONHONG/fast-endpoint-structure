@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Feature.Account.Member;
 
-public class CreateUserEndpoint : JEndpoint<CreateUserEndpoint, CreateUserRequest, JResults<string>, AppDbContext>
+public class CreateUserEndpoint : JEndpoint<CreateUserEndpoint, CreateUserRequest, Results<string>, AppDbContext>
 {
     private readonly ICreateUserService _service;
 

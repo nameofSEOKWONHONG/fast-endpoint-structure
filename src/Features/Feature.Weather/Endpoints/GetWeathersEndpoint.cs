@@ -6,7 +6,7 @@ using Feature.Domain.Weather.Result;
 
 namespace Feature.Weather.Endpoints;
 
-public class GetWeathersEndpoint : Endpoint<GetWeathersRequest, JPaginatedResult<GetWeatherResult>>
+public class GetWeathersEndpoint : Endpoint<GetWeathersRequest, PaginatedResult<GetWeatherResult>>
 {
     private readonly IGetWeathersService _service;
     public GetWeathersEndpoint(IGetWeathersService service)

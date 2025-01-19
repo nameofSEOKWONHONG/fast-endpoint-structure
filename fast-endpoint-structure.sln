@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Package", "00.Package", 
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Domain", "src\Feature.Domain\Feature.Domain.csproj", "{67CB2B45-9D07-44B6-A168-332CE10C65A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Domain", "src\Features\Feature.Domain\Feature.Domain.csproj", "{67CB2B45-9D07-44B6-A168-332CE10C65A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.Web", "03.Web", "{FF251EE0-A239-4FD2-8F31-577E689F5A1D}"
 EndProject
@@ -25,11 +25,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastEndpointWeb", "src\Fast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastEndpointWeb.Client", "src\FastEndpointWeb\FastEndpointWeb.Client\FastEndpointWeb.Client.csproj", "{746B1F2D-16E9-49E0-A55A-BB76E9E7DA16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Pdf", "src\Feature.Pdf\Feature.Pdf.csproj", "{C5336BC4-19AD-4976-BB21-13E157FB4391}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Pdf", "src\Features\Feature.Pdf\Feature.Pdf.csproj", "{C5336BC4-19AD-4976-BB21-13E157FB4391}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Product", "src\Feature.Product\Feature.Product.csproj", "{3BBBF7F6-61EF-4669-8D99-5F016FEB32F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Product", "src\Features\Feature.Product\Feature.Product.csproj", "{3BBBF7F6-61EF-4669-8D99-5F016FEB32F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Infra", "src\Feature.Infra\Feature.Infra.csproj", "{5EA4F1A9-77F1-47A2-8362-E1A16BA67CD1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Infra", "src\Features\Feature.Infra\Feature.Infra.csproj", "{5EA4F1A9-77F1-47A2-8362-E1A16BA67CD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Healthcare", "src\Features\Feature.Healthcare\Feature.Healthcare.csproj", "{9CAF9AFB-1C6A-4288-8D9F-ECA879EBD135}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Order", "src\Features\Feature.Order\Feature.Order.csproj", "{EA5CD195-6161-477B-B19F-F83F6BD4FE85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +81,14 @@ Global
 		{5EA4F1A9-77F1-47A2-8362-E1A16BA67CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EA4F1A9-77F1-47A2-8362-E1A16BA67CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EA4F1A9-77F1-47A2-8362-E1A16BA67CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CAF9AFB-1C6A-4288-8D9F-ECA879EBD135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CAF9AFB-1C6A-4288-8D9F-ECA879EBD135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CAF9AFB-1C6A-4288-8D9F-ECA879EBD135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CAF9AFB-1C6A-4288-8D9F-ECA879EBD135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA5CD195-6161-477B-B19F-F83F6BD4FE85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA5CD195-6161-477B-B19F-F83F6BD4FE85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA5CD195-6161-477B-B19F-F83F6BD4FE85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA5CD195-6161-477B-B19F-F83F6BD4FE85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CE1112D0-DF04-4EA1-97B0-B97F6CC020F3} = {3AE9E10B-1771-4FA0-A1CF-013D2DF4A28A}
@@ -89,5 +101,7 @@ Global
 		{3BBBF7F6-61EF-4669-8D99-5F016FEB32F5} = {3AE9E10B-1771-4FA0-A1CF-013D2DF4A28A}
 		{67CB2B45-9D07-44B6-A168-332CE10C65A4} = {20F9A0F3-46A0-4E4D-A182-C77C973011DD}
 		{5EA4F1A9-77F1-47A2-8362-E1A16BA67CD1} = {3AE9E10B-1771-4FA0-A1CF-013D2DF4A28A}
+		{9CAF9AFB-1C6A-4288-8D9F-ECA879EBD135} = {3AE9E10B-1771-4FA0-A1CF-013D2DF4A28A}
+		{EA5CD195-6161-477B-B19F-F83F6BD4FE85} = {3AE9E10B-1771-4FA0-A1CF-013D2DF4A28A}
 	EndGlobalSection
 EndGlobal
