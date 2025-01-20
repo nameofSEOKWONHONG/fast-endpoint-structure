@@ -37,6 +37,10 @@ public class GatherTourBatchService : ServiceBase<GatherTourBatchService, TourDb
                 list.AddRange(summary);
             });
         }
+        catch (OperationCanceledException e)
+        {
+            this.Logger.LogError(e, e.Message);
+        }
         catch (Exception e)
         {
             this.Logger.LogError(e, e.Message);
