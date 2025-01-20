@@ -1,4 +1,5 @@
-﻿using Feature.Domain.Tour.Abstract;
+﻿using eXtensionSharp;
+using Feature.Domain.Tour.Abstract;
 using Feature.Domain.Tour.Dtos;
 using Feature.Tour.Tours.Entities;
 using Infrastructure.Base;
@@ -41,7 +42,12 @@ public class GatherTourBatchService : ServiceBase<GatherTourBatchService, TourDb
             this.Logger.LogError(e, e.Message);
         }
 
-        var addItems = list.Select(m => new TourSummary()).ToList();
+        if (!list.xIsEmpty()) return true;
+        
+        var addItems = list.Select(m => new TourSummary()
+        {
+            //TODO: CONVERT
+        }).ToList();
         await this.DbContext.TourSummaries.AddRangeAsync(addItems, cancellationToken);
         await this.DbContext.SaveChangesAsync(cancellationToken);
 

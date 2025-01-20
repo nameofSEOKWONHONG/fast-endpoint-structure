@@ -1,9 +1,8 @@
 ﻿using Feature.Domain.Tour.Dtos;
-using Feature.Tour.Tours.Entities;
 
-namespace Feature.Tour.Tours.OtaProvider;
+namespace Feature.Tour.Tours.OtaProviders;
 
-public class AgodaProvider : ITravelProvider
+public class AgodaProvider : IOtaProvider
 {
     public Task<TourSummaryDto> GetTour(CancellationToken cancellationToken)
     {

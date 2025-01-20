@@ -1,10 +1,9 @@
 ﻿using System.Net.Http.Json;
 using Feature.Domain.Tour.Dtos;
-using Feature.Tour.Tours.Entities;
 
-namespace Feature.Tour.Tours.OtaProvider;
+namespace Feature.Tour.Tours.OtaProviders;
 
-public class HanaProvider : ITravelProvider
+public class HanaProvider : IOtaProvider
 {
     private readonly HttpClient _httpClient;
 

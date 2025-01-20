@@ -11,6 +11,18 @@ public static class DependencyInjection
 {
     public static void AddWeatherFeature(this WebApplicationBuilder builder)
     {
+        builder.Services.AddHttpClient("hana", client =>
+        {
+            client.BaseAddress = new Uri("https://api.hanatour.com");
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            client.DefaultRequestHeaders.Add("Authorize", Environment.GetEnvironmentVariable("HANA_TOUR_API_KEY"));
+        });
+        builder.Services.AddHttpClient("agoda", client =>
+        {
+            client.BaseAddress = new Uri("https://api.agoda.com");
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            client.DefaultRequestHeaders.Add("Authorize", Environment.GetEnvironmentVariable("AGODA_TOUR_API_KEY"));            
+        });
         builder.Services.AddScoped<IGetTourService, GetTourService>();
         builder.Services.AddScoped<IGatherTourBatchService, GatherTourBatchService>();
         builder.Services.AddScoped<IGatherTourService, GatherTourService>();

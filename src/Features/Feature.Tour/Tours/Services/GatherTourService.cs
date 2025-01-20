@@ -1,6 +1,6 @@
 ﻿using Feature.Domain.Tour.Abstract;
 using Feature.Domain.Tour.Dtos;
-using Feature.Tour.Tours.OtaProvider;
+using Feature.Tour.Tours.OtaProviders;
 using Infrastructure.Base;
 using Infrastructure.Session;
 using Microsoft.Extensions.Logging;
@@ -17,19 +17,20 @@ public class GatherTourService : ServiceBase<GatherTourService, TourDbContext, s
         _httpClientFactory = httpClientFactory;
     }
 
+    private readonly Dictionary<string, Func<IHttpClientFactory, IOtaProvider>> states = new()
+    {
+        {
+            "hana", (clientFactory) =>
+            {
+                var client = clientFactory.CreateClient("hana");
+                return new HanaProvider(client);
+            }
+        },
+        //TODO : ADD PROVIDER
+    };
+    
     public override async Task<TourSummaryDto> HandleAsync(string request, CancellationToken cancellationToken)
     {
-        var states = new Dictionary<string, Func<IHttpClientFactory, ITravelProvider>>()
-        {
-            {
-                "hana", (clientFactory) =>
-                {
-                    var client = clientFactory.CreateClient("hana");
-                    return new HanaProvider(client);
-                }
-            }
-        };
-        
         var provider = states[request](_httpClientFactory);
         return await provider.GetTour(cancellationToken);
     }
