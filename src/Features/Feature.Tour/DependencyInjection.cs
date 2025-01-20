@@ -13,7 +13,7 @@ public static class DependencyInjection
     {
         builder.Services.AddScoped<IGetTourService, GetTourService>();
         builder.Services.AddScoped<IGatherTourBatchService, GatherTourBatchService>();
-        builder.Services.AddTransient<IGatherTourService, GatherTourService>();
+        builder.Services.AddScoped<IGatherTourService, GatherTourService>();
         
         builder.Services
             .AddDbContext<TourDbContext>((s, options) =>

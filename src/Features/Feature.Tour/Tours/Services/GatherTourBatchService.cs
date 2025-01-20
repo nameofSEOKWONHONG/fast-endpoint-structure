@@ -9,12 +9,12 @@ namespace Feature.Tour.Tours.Services;
 
 public class GatherTourBatchService : ServiceBase<GatherTourBatchService, TourDbContext, string[], bool>, IGatherTourBatchService
 {
-    private readonly IGatherTourService _gatherTourServices;
+    private readonly IGatherTourService _gatherTourService;
 
     public GatherTourBatchService(ILogger<GatherTourBatchService> logger, ISessionContext sessionContext, TourDbContext dbContext,
-        IGatherTourService gatherTourServices) : base(logger, sessionContext, dbContext)
+        IGatherTourService gatherTourService) : base(logger, sessionContext, dbContext)
     {
-        _gatherTourServices = gatherTourServices;
+        _gatherTourService = gatherTourService;
     }
 
     public override async Task<bool> HandleAsync(string[] request, CancellationToken cancellationToken)
@@ -32,7 +32,7 @@ public class GatherTourBatchService : ServiceBase<GatherTourBatchService, TourDb
             };
             await Parallel.ForEachAsync(request, parallelOptions, async (item, token) =>
             {
-                var summary = await _gatherTourServices.HandleAsync(item, token);
+                var summary = await _gatherTourService.HandleAsync(item, token);
                 list.AddRange(summary);
             });
         }
