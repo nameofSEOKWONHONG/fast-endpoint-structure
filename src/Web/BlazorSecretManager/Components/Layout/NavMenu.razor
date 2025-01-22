@@ -1,0 +1,39 @@
+﻿@using BlazorSecretManager.Entities
+@using BlazorSecretManager.Services.Menu
+@using eXtensionSharp
+@using Color = MudBlazor.Color
+
+<MudNavMenu>
+    @foreach (var menu in _menus)
+    {
+        if (menu.Url == "/")
+        {
+            <MudNavLink Match="NavLinkMatch.All"
+                        Icon="@menu.Icon"
+                        Href="@menu.Url">
+                @menu.Name
+            </MudNavLink>
+        }
+        else
+        {
+            <MudNavLink Match="NavLinkMatch.Prefix"
+                        Icon="@menu.Icon"
+                        Href="@menu.Url">
+                @menu.Name
+            </MudNavLink>
+        }
+    }
+</MudNavMenu>
+
+@inject IMenuService MenuService
+@code {
+    List<Menu> _menus = new();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _menus = await MenuService.GetMenuWithSubMenusAsync();
+            StateHasChanged();
+        }
+    }
+}

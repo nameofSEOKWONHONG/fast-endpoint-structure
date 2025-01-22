@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="AWSSDK.S3" Version="3.7.411.6" />
+    <PackageVersion Include="CodeBeam.MudBlazor.Extensions" Version="8.0.0" />
     <PackageVersion Include="Confluent.Kafka" Version="2.8.0" />
     <PackageVersion Include="EFCore.NamingConventions" Version="9.0.0" />
     <PackageVersion Include="eXtensionSharp" Version="1.0.2" />
@@ -15,6 +16,7 @@
     <PackageVersion Include="MailKit" Version="4.9.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.0" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
+    <PackageVersion Include="MudBlazor" Version="8.0.0" />
     <PackageVersion Include="QuestPDF" Version="2025.1.0-alpha0" />
     <PackageVersion Include="Riok.Mapperly" Version="4.1.1" ExcludeAssets="runtime" PrivateAssets="all" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.2.1" />

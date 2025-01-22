@@ -1,0 +1,23 @@
+@page "/logout"
+@attribute [Authorize]
+
+@using BlazorSecretManager.Infrastructure
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using SecretManager
+
+@inject ProtectedSessionStorage ProtectedSessionStore;
+@inject CustomAuthStateProvider AuthState
+@inject NavigationManager NavManager
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await ProtectedSessionStore.DeleteAsync(Constants.JwtCacheKey);
+            AuthState.NotifyUserLogout();
+            NavManager.NavigateTo("/signin", true);            
+        }
+    }
+}

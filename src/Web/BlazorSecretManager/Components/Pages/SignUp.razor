@@ -1,0 +1,113 @@
+@page "/signup"
+
+@using BlazorSecretManager.Components.Layout
+@using BlazorSecretManager.Infrastructure
+@using BlazorSecretManager.Services.Auth
+@using eXtensionSharp
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Color = MudBlazor.Color
+
+@rendermode InteractiveAuto
+
+@layout LoginLayout
+@attribute [AllowAnonymous]
+
+<AuthorizeView>
+    <Authorized>
+        <h5>인증된 상태입니다.</h5>
+    </Authorized>
+    <NotAuthorized>
+        <EditForm Model="@_request">
+            <ChildContent Context="None" >
+                <DataAnnotationsValidator/>
+                <MudGrid Class="d-flex justify-center flex-grow-1 gap-4 align-center" Style="height: 80vh;" >
+                    <MudItem xs="12" sm="7">
+                        <MudCard>
+                            <MudCardContent>
+                                <MudTextField Label="Email" Class="mt-3"
+                                              @bind-Value="_request.Email" For="@(() => _request.Email)"/>
+                                <br/>
+                                <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3"
+                                              @bind-Value="_request.Password" For="@(() => _request.Password)" InputType="InputType.Password"/>
+                                <br/>
+                                <MudTextField Label="Confirm Password" Class="mt-3"
+                                              @bind-Value="_request.ConfirmPassword" For="@(() => _request.ConfirmPassword)" InputType="InputType.Password"/>
+                                <br/>
+                                <MudTextField Label="Name" Class="mt-3"
+                                              @bind-Value="_request.Name" For="@(() => _request.Name)"/>
+                                <br/>
+                                <MudTextField Label="Phone" Class="mt-3" Placeholder="(-)없이 입력"
+                                              @bind-Value="_request.PhoneNumber" For="@(() => _request.PhoneNumber)"/>
+                                <br/>
+                                <MudSelect T="string" @bind-Value="_request.RoleName" Label="Role Type">
+                                    @foreach (var item in RegisterRequest.Types)
+                                    {
+                                        <MudSelectItem Value="@item">@item.ToUpper()</MudSelectItem>    
+                                    }
+                                </MudSelect>
+                                <br/>
+                            </MudCardContent>
+                            <MudCardActions>
+                                <MudGrid Class="d-flex justify-end flex-grow-1 gap-4">
+                                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleSignUp">Sign Up</MudButton>
+                                </MudGrid>
+                            </MudCardActions>
+                        </MudCard>
+                    </MudItem>
+                </MudGrid>
+            </ChildContent>
+        </EditForm>
+    </NotAuthorized>
+</AuthorizeView>
+
+@inject IAuthService AuthService;
+@inject ISnackbar Snackar
+@code {
+    private void OnValidSubmit(EditContext context)
+    {
+        StateHasChanged();
+    }
+
+    [CascadingParameter] Task<AuthenticationState> AuthState { get; set; }
+    readonly RegisterRequest _request = new();
+
+    [Inject] CustomAuthStateProvider AuthStateProvider { get; set; }
+    [Inject] NavigationManager NavigationManager { get; set; }
+
+    private async Task HandleSignUp()
+    {
+        if (_request.Email.xIsEmpty() || 
+            _request.Password.xIsEmpty() ||
+            _request.ConfirmPassword.xIsEmpty() ||
+            _request.Name.xIsEmpty() ||
+            _request.PhoneNumber.xIsEmpty())
+        {
+            this.Snackar.Add("Invalidate input.", Severity.Error);
+            return;
+        }
+
+        if (_request.RoleName.xIsEmpty())
+        {
+            this.Snackar.Add("Select role type.", Severity.Error);
+            return;
+        }
+
+        var registered = await RegisterUser();
+        if (registered.xIsTrue())
+        {
+            this.Snackar.Add("Registered.", Severity.Success);
+            await Task.Delay(1000);
+            
+            NavigationManager.NavigateTo("/signin", true);
+        }
+    }
+    
+    private async Task<bool> RegisterUser()
+    {
+        await Task.Delay(1);
+
+        var result = await AuthService.SignUp(_request);
+        return result;
+    }
+}
