@@ -34,7 +34,7 @@ public class GatherTourBatchService : ServiceBase<GatherTourBatchService, TourDb
             await Parallel.ForEachAsync(request, parallelOptions, async (item, token) =>
             {
                 var summary = await _gatherTourService.HandleAsync(item, token);
-                list.AddRange(summary);
+                list.Add(summary);
             });
         }
         catch (OperationCanceledException e)
